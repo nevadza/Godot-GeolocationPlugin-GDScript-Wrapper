@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 
 class_name LocationRequest
 
@@ -22,7 +22,7 @@ func _request():
 	if  status != geolocation_api.geolocation_authorization_status.PERMISSION_STATUS_ALLOWED:
 		geolocation_api._on_log("** request permission")
 		geolocation_api.request_permissions()
-		var new_status = yield(geolocation_api, "authorization_changed")
+		var new_status = await geolocation_api.authorization_changed
 		if new_status != geolocation_api.geolocation_authorization_status.PERMISSION_STATUS_ALLOWED:
 			error = geolocation_api.geolocation_error_codes.ERROR_DENIED
 			is_resolved = true
@@ -31,7 +31,7 @@ func _request():
 		
 	if geolocation_api.should_check_location_capability():
 		geolocation_api.request_location_capabilty()
-		var capable = yield(geolocation_api, "location_capability_result")
+		var capable = await geolocation_api.location_capability_result
 		if !capable:
 			error = geolocation_api.geolocation_error_codes.ERROR_LOCATION_DISABLED
 			is_resolved = true
@@ -48,7 +48,7 @@ func _on_location_update(location:Location):
 	emit_signal("location_update",location)
 	
 func _listen_for_error():
-	error = yield(geolocation_api, "error")
+	error = await geolocation_api.error
 	geolocation_api._on_log("** error happend")
 	if is_resolved:
 		return # request already resolved error irrelevant
@@ -58,7 +58,7 @@ func _listen_for_error():
 	emit_signal("location_update", null) # no location, so send null
 	
 func _listen_for_location():
-	var location = yield(geolocation_api, "location_update")
+	var location = await geolocation_api.location_update
 	geolocation_api._on_log("** location received")
 	if is_resolved:
 		return # request already resolved with error

@@ -1,12 +1,12 @@
 # Geolocation Plugin GDScript API Wrapper
 
-C# Wrapper Class for easier usage of the Godot Geolocation Plugin for Android (<https://github.com/WolfBearGames/Godot-GeolocationPlugin-Android>) and iOS (<https://github.com/WolfBearGames/Godot-GeolocationPlugin-iOS>)
+<!-- C# Wrapper Class for easier usage of the Godot Geolocation Plugin for Android (<https://github.com/WolfBearGames/Godot-GeolocationPlugin-Android>) and iOS (<https://github.com/WolfBearGames/Godot-GeolocationPlugin-iOS>) -->
 
 The GDScript wrapper is incomplete and does not support the heading functionality.
 
-## Usage Example (Example App)
+<!-- ## Usage Example (Example App) -->
 
-<https://github.com/WolfBearGames/GeolocationTestApp>
+<!-- <https://github.com/WolfBearGames/GeolocationTestApp> -->
 
 ## Install Wrapper
 
@@ -111,6 +111,8 @@ func _on_button_stop_location_updates():
 ## License
 
 Copyright 2022 Andreas Ritter (www.wolfbeargames.de)
+
+Copyright 2024 Gabriel Olekšák (www.nevadza.com)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
