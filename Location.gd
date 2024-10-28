@@ -75,4 +75,4 @@ func _to_string():
 	props.append("timestamp : %d" % [timestamp])
 	props.append("latitude_string : %s" % [lat_string])
 	props.append("longitude_string : %s" % [lon_string])
-	return PoolStringArray(props).join("\n")
+	return "\n".join(PackedStringArray(props))

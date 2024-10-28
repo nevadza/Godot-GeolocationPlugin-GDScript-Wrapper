@@ -1,17 +1,18 @@
 # Geolocation Plugin GDScript API Wrapper
 
-C# Wrapper Class for easier usage of the Godot Geolocation Plugin for Android (<https://github.com/WolfBearGames/Godot-GeolocationPlugin-Android>) and iOS (<https://github.com/WolfBearGames/Godot-GeolocationPlugin-iOS>)
+<!-- C# Wrapper Class for easier usage of the Godot Geolocation Plugin for Android (<https://github.com/WolfBearGames/Godot-GeolocationPlugin-Android>) and iOS (<https://github.com/WolfBearGames/Godot-GeolocationPlugin-iOS>) -->
 
 The GDScript wrapper is incomplete and does not support the heading functionality.
 
-## Usage Example (Example App)
+<!-- ## Usage Example (Example App) -->
 
-<https://github.com/WolfBearGames/GeolocationTestApp>
+<!-- <https://github.com/WolfBearGames/GeolocationTestApp> -->
 
 ## Install Wrapper
 
-1. Copy `GeolocationWrapper.gd`, `Location.gd`, `LocationRequest.gd` and `LocationWatcher.gd` to your project
-2. Add `GeolocationWrapper.gd` to Project > AutoLoad as "GeolocationWrapper"
+1. Navigate to <https://github.com/nevadzask/Godot-GeolocationPlugin-GDScript-Wrapper/releases/> and download the latest release.
+2. Extract the contents of the project zip file into your project. 
+3. Add `GeolocationWrapper.gd` to Project > AutoLoad as "GeolocationWrapper"
 
 ## Initialization
 
@@ -56,7 +57,7 @@ func _on_button_request_location():
     var request = geolocation_api.request_location_autopermission()
     var location:Location = yield(request,"location_update")
 
-    # location is null when no location could be found (no permission, no connection, no capabilty)
+    # location is null when no location could be found (no permission, no connection, no capability)
     if location == null:
         # log error if an error was reported
         if request.error > 0:
@@ -111,6 +112,8 @@ func _on_button_stop_location_updates():
 ## License
 
 Copyright 2022 Andreas Ritter (www.wolfbeargames.de)
+
+Copyright 2024 Gabriel Olekšák (www.nevadza.com)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

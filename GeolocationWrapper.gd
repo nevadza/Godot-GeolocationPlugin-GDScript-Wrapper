@@ -27,11 +27,11 @@ enum geolocation_desired_accuracy_constants {
 enum geolocation_error_codes {
 	ERROR_DENIED = 1 << 0,
 	ERROR_NETWORK = 1 << 1,
-	ERROR_HEADING_FAILURE = 1 << 2
-	ERROR_LOCATION_UNKNOWN = 1 << 3
-	ERROR_TIMEOUT = 1 << 4
-	ERROR_UNSUPPORTED = 1 << 5
-	ERROR_LOCATION_DISABLED = 1 << 6
+	ERROR_HEADING_FAILURE = 1 << 2,
+	ERROR_LOCATION_UNKNOWN = 1 << 3,
+	ERROR_TIMEOUT = 1 << 4,
+	ERROR_UNSUPPORTED = 1 << 5,
+	ERROR_LOCATION_DISABLED = 1 << 6,
 	ERROR_UNKNOWN = 1 << 7
 }
 
@@ -72,16 +72,16 @@ func _setup_native_plugin():
 		supported = true
 		
 		if platform == platforms.iOS:
-			_geolocation_plugin.connect("authorization_changed", self, "_on_authorization_changed")
+			_geolocation_plugin.connect("authorization_changed", Callable(self, "_on_authorization_changed"))
 	
 		if platform == platforms.android:
-			get_tree().connect("on_request_permissions_result", self, "_on_godot_android_permissions")
+			get_tree().connect("on_request_permissions_result", Callable(self, "_on_godot_android_permissions"))
 			
-		_geolocation_plugin.connect("error", self, "_on_error")
-		_geolocation_plugin.connect("log", self, "_on_log")
-		_geolocation_plugin.connect("location_update", self, "_on_location_update")
-		_geolocation_plugin.connect("heading_update", self, "_on_heading_update")
-		_geolocation_plugin.connect("location_capability_result", self, "_on_location_capability_result")
+		_geolocation_plugin.connect("error", Callable(self, "_on_error"))
+		_geolocation_plugin.connect("log", Callable(self, "_on_log"))
+		_geolocation_plugin.connect("location_update", Callable(self, "_on_location_update"))
+		_geolocation_plugin.connect("heading_update", Callable(self, "_on_heading_update"))
+		_geolocation_plugin.connect("location_capability_result", Callable(self, "_on_location_capability_result"))
 		
 	else:
 		_on_log("No singleton")
@@ -90,9 +90,9 @@ func _setup_native_plugin():
 		
 func _on_godot_android_permissions(permission:String, granted:bool):
 	if _last_android_permission_signal == -1:
-		_last_android_permission_signal = OS.get_ticks_msec()
+		_last_android_permission_signal = Time.get_ticks_msec()
 	else:
-		var time_diff:int = OS.get_ticks_msec() - _last_android_permission_signal
+		var time_diff:int = Time.get_ticks_msec() - _last_android_permission_signal
 		_last_android_permission_signal = -1
 		if time_diff < 500:
 			return
@@ -144,8 +144,8 @@ func is_updating_location() -> bool:
 func should_show_permission_requirement_explanation() -> bool:
 	return _geolocation_plugin.should_show_permission_requirement_explanation()
 	
-func request_location_capabilty():
-	_geolocation_plugin.request_location_capabilty()
+func request_location_capability():
+	_geolocation_plugin.request_location_capability()
 	
 func should_check_location_capability() ->bool:
 	return _geolocation_plugin.should_check_location_capability()
@@ -188,7 +188,7 @@ func _on_error(code:int):
 	emit_signal("error", code)
 
 func _on_authorization_changed(status:int):
-	emit_signal("authorization_changed", status)
+	call_deferred("emit_signal", "authorization_changed", status);
 
 func _on_location_update(location_data:Dictionary):
 	var location_object:Location = Location.new(location_data)
