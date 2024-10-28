@@ -144,8 +144,8 @@ func is_updating_location() -> bool:
 func should_show_permission_requirement_explanation() -> bool:
 	return _geolocation_plugin.should_show_permission_requirement_explanation()
 	
-func request_location_capabilty():
-	_geolocation_plugin.request_location_capabilty()
+func request_location_capability():
+	_geolocation_plugin.request_location_capability()
 	
 func should_check_location_capability() ->bool:
 	return _geolocation_plugin.should_check_location_capability()

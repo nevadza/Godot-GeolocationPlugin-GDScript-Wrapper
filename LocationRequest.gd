@@ -30,7 +30,7 @@ func _request():
 			return
 		
 	if geolocation_api.should_check_location_capability():
-		geolocation_api.request_location_capabilty()
+		geolocation_api.request_location_capability()
 		var capable = await geolocation_api.location_capability_result
 		if !capable:
 			error = geolocation_api.geolocation_error_codes.ERROR_LOCATION_DISABLED
